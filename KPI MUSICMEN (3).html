@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KPI MUSICMEN</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#e9edf0;--sf:#fff;--tx:#11161c;--mu:#5d6772;--bd:#d3d9de;--ac:#8a5a0c;--g:#17704f;--b:#245fa8;--y:#946200;--o:#b44a12;--r:#b3261e;--hd:#11161c;--ht:#f2f4f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1216;--sf:#181e24;--tx:#eef1f4;--mu:#9aa5b0;--bd:#2c353e;--ac:#e0a43c;--g:#5ec58f;--b:#7ab3ef;--y:#e5b34f;--o:#ef9a5a;--r:#f28b8b;--hd:#080b0e;--ht:#eef1f4;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1216;--sf:#181e24;--tx:#eef1f4;--mu:#9aa5b0;--bd:#2c353e;--ac:#e0a43c;--g:#5ec58f;--b:#7ab3ef;--y:#e5b34f;--o:#ef9a5a;--r:#f28b8b;--hd:#080b0e;--ht:#eef1f4;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque',Figtree,sans-serif;margin:0;letter-spacing:-.01em}
+header{background:var(--hd);color:var(--ht);padding:14px 16px 0}
+.hi{max-width:1080px;margin:auto}
+header h1{font-size:22px;font-weight:800}
+header p{margin:2px 0 10px;opacity:.7;font-size:13px}
+nav{display:flex;gap:2px;overflow-x:auto}
+nav button{background:none;border:0;color:var(--ht);opacity:.65;padding:10px 14px;font:inherit;font-weight:500;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+nav button.on{opacity:1;border-color:var(--ac)}
+main{max-width:1080px;margin:auto;padding:16px}
+section{display:none}section.on{display:block}
+.mu{color:var(--mu);font-size:13px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:0 0 14px}
+label{display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--mu);flex:1 1 170px}
+input,select,textarea{font:inherit;color:var(--tx);background:var(--sf);border:1px solid var(--bd);border-radius:6px;padding:7px 9px;width:100%;min-width:0}
+input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+button.p,button.s{font:inherit;font-weight:700;border-radius:6px;padding:8px 14px;cursor:pointer;border:1px solid var(--ac)}
+button.p{background:var(--ac);color:var(--sf)}
+button.s{background:none;color:var(--tx);border-color:var(--bd)}
+.w{overflow-x:auto;background:var(--sf);border:1px solid var(--bd);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:780px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+th{font-size:13px;color:var(--mu);font-weight:500}
+tr:last-child td{border-bottom:0}
+td small{display:block;color:var(--mu);font-size:12px}
+.n{max-width:80px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:18px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.nm{font:800 18px 'Bricolage Grotesque',sans-serif}
+.sc{font:800 38px/1.1 'Bricolage Grotesque',sans-serif}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%}
+.ct{font-weight:700}
+.sum{display:flex;flex-wrap:wrap;align-items:center;gap:18px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:14px;margin-top:14px}
+.sum svg{width:200px;flex:none}
+.big{font:800 40px/1 'Bricolage Grotesque',sans-serif}
+#arc{transition:stroke-dashoffset .4s,stroke .4s}
+#nd{transition:transform .4s;transform-origin:100px 100px}
+.bad{color:var(--r);font-weight:700}.ok{color:var(--g);font-weight:700}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--hd);color:var(--ht);padding:10px 16px;border-radius:6px;display:none;z-index:9}
+dialog{background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:8px;width:min(640px,92vw)}
+textarea{height:220px;font-size:12px}
+#edlg label{flex:none;margin-bottom:8px}
+h2{font-size:18px;margin:18px 0 8px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><div class="hi"><h1>Musicmen Store · Sistem KPI</h1><p>Penilaian kinerja karyawan bulanan</p>
+<nav id="nav"><button data-t="dash" class="on">Dasbor</button><button data-t="form">Penilaian</button><button data-t="mst">Master KPI</button><button data-t="skl">Skala nilai</button></nav></div></header>
+<main>
+<section id="dash" class="on">
+<div class="row"><label style="max-width:220px">Periode<select id="per"></select></label><div id="avg" class="mu" style="flex:1 1 200px"></div><button class="s" id="exp">Salin semua data</button></div>
+<div class="cards" id="cards"></div>
+<h2>Riwayat penilaian</h2>
+<div class="w"><table><thead><tr><th>Periode</th><th>Karyawan</th><th>Penilai</th><th>Nilai</th><th>Kategori</th><th></th></tr></thead><tbody id="hist"></tbody></table></div>
+<p class="mu">Data tersimpan di browser perangkat ini. Gunakan "Salin semua data" untuk mencadangkan ke Excel atau Google Sheets.</p>
+</section>
+
+<section id="form">
+<div class="row"><label>Karyawan<select id="emp"></select></label><label>Periode<input id="prd" type="month"></label><label>Penilai<input id="rtr" placeholder="Nama penilai"></label><label>Tanggal penilaian<input id="dt" type="date"></label></div>
+<div class="w"><table><thead><tr><th>Indikator &amp; cara ukur</th><th>Target</th><th>Realisasi / bukti</th><th>% capaian</th><th>Skor</th><th>Bobot</th><th>Nilai</th><th>Catatan</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="mu">Isi "% capaian" untuk indikator kuantitatif agar skor terisi otomatis (≥110% = 5, 100–109% = 4, 90–99% = 3, 75–89% = 2, &lt;75% = 1). Skor tetap bisa diubah manual, terutama untuk indikator kualitas.</p>
+<div class="sum"><svg viewBox="0 0 200 112"><path d="M20 100A80 80 0 0 1 180 100" fill="none" stroke="var(--bd)" stroke-width="14" pathLength="100"/><path id="arc" d="M20 100A80 80 0 0 1 180 100" fill="none" stroke="var(--g)" stroke-width="14" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/><line id="nd" x1="100" y1="100" x2="100" y2="34" stroke="var(--tx)" stroke-width="3" stroke-linecap="round" style="transform:rotate(-90deg)"/><circle cx="100" cy="100" r="6" fill="var(--tx)"/></svg>
+<div><div class="mu">Total nilai KPI</div><div class="big" id="tot">0</div><div class="ct" id="cat"></div><div id="wn" class="bad" hidden></div></div>
+<div style="margin-left:auto;display:flex;gap:8px"><button class="s" id="rst">Kosongkan</button><button class="p" id="sv">Simpan penilaian</button></div></div>
+</section>
+
+<section id="mst">
+<div class="row"><label style="max-width:320px">Posisi<select id="me"></select></label><div id="mws"></div></div>
+<div id="job" class="card" style="margin-bottom:14px"></div>
+<div class="w"><table><thead><tr><th>Indikator KPI</th><th>Target usulan</th><th>Bobot (%)</th><th>Sumber data / bukti</th><th></th></tr></thead><tbody id="mt"></tbody></table></div>
+<p class="mu">Target dan bobot adalah usulan awal. Validasi dengan manajemen sebelum dipakai resmi. Total bobot tiap posisi harus 100%.</p>
+<button class="p" id="madd">Tambah indikator</button> <button class="s" id="mrs">Kembalikan target &amp; bobot awal posisi ini</button>
+</section>
+
+<section id="skl">
+<h2>Rumus</h2><p>Nilai berbobot = (Skor ÷ 5) × Bobot. Total KPI = jumlah seluruh nilai berbobot.</p>
+<h2>Skala skor</h2>
+<div class="w"><table style="min-width:0"><tbody>
+<tr><td><b>1</b></td><td>Sangat kurang</td><td>Jauh di bawah standar; perlu perbaikan mendesak.</td></tr>
+<tr><td><b>2</b></td><td>Kurang</td><td>Di bawah standar; banyak target belum tercapai.</td></tr>
+<tr><td><b>3</b></td><td>Cukup</td><td>Sesuai standar yang disepakati.</td></tr>
+<tr><td><b>4</b></td><td>Baik</td><td>Di atas standar; hasil konsisten dan kualitas kerja baik.</td></tr>
+<tr><td><b>5</b></td><td>Sangat baik</td><td>Jauh di atas standar; sangat konsisten dan didukung bukti.</td></tr></tbody></table></div>
+<h2>Interpretasi total nilai</h2>
+<div class="w"><table style="min-width:0"><tbody>
+<tr><td style="color:var(--g)"><b>90–100</b></td><td>Sangat baik</td></tr>
+<tr><td style="color:var(--b)"><b>80–89,99</b></td><td>Baik</td></tr>
+<tr><td style="color:var(--y)"><b>70–79,99</b></td><td>Cukup / memenuhi sebagian besar standar</td></tr>
+<tr><td style="color:var(--o)"><b>60–69,99</b></td><td>Perlu perbaikan</td></tr>
+<tr><td style="color:var(--r)"><b>&lt;60</b></td><td>Perlu pembinaan intensif</td></tr></tbody></table></div>
+<p class="mu">Untuk indikator kualitas atau risiko, gunakan rubrik khusus yang disepakati.</p>
+</section>
+</main>
+<div id="toast"></div>
+<dialog id="edlg"><h3 id="eh">Edit indikator</h3><div style="margin-top:10px"><label>Nama indikator<input id="en"></label><label>Cara ukur<input id="ec"></label><label>Target<input id="et"></label><label>Bobot (%)<input id="ew" type="number" min="0" max="100"></label><label>Sumber data / bukti<input id="es"></label></div><div class="row" style="margin:10px 0 0;justify-content:flex-end"><button class="s" id="ecl">Batal</button><button class="p" id="esv">Simpan</button></div></dialog>
+<dialog id="dlg"><h3>Salin data</h3><p class="mu">Salin teks ini lalu tempel ke Excel atau Google Sheets.</p><textarea id="cv" readonly></textarea><div class="row" style="margin:10px 0 0;justify-content:flex-end"><button class="s" id="cl">Tutup</button><button class="p" id="cp">Salin</button></div></dialog>
+<script>
+const E=[
+{id:'owner',pos:'Owner / Founder',name:'Ridwan',rep:'Atasan: —',job:'Strategi bisnis dan pengembangan usaha; pengelolaan keuangan/cash flow; keputusan produk dan pembelian; hubungan supplier/partner; persetujuan promo; evaluasi tim dan laporan.'},
+{id:'om',pos:'Operational Manager',name:'Yoga Indarko',rep:'Atasan: Owner / Founder',job:'Operasional harian; jadwal/shift; kepatuhan SOP; kebersihan dan kenyamanan toko; koordinasi tim; kontrol stok bersama inventory; pemeriksaan laporan; penanganan kendala; usulan restock.'},
+{id:'cs',pos:'Customer Service & Marketplace',name:'Vail',rep:'Atasan langsung: Owner / Founder',job:'Menjawab chat online; mengelola Shopee/Tokopedia/platform lain; mengunggah produk; sinkronisasi stok; input pesanan dan data customer; follow-up; menjaga rating; laporan marketplace; membantu packing bila diperlukan.'},
+{id:'sc',pos:'Sales Consultant',name:'Ody',rep:'Atasan langsung: Owner / Founder',job:'Menyambut dan konsultasi customer; menjelaskan spesifikasi produk; demo gitar/bass/efek/amplifier; transaksi jual beli dan tukar tambah; upselling/cross-selling; mengumpulkan prospek dan follow-up; display dan target penjualan.'},
+{id:'tk',pos:'Technician & Inventory',name:'Gunawan',rep:'Atasan langsung: Owner / Founder',job:'Setup gitar/bass; pemeriksaan neck, fret, action, intonasi dan elektronik; service ringan; QC barang baru/second; persiapan produk; pencatatan barang masuk/keluar; stok gudang/display; stock opname; display dan packing produk bernilai tinggi.'}];
+const K={
+owner:[['Pencapaian target penjualan toko','Realisasi omzet ÷ target omzet × 100%','≥100% target bulanan',25,'Laporan penjualan/POS'],
+['Pemantauan margin/laba kotor','Realisasi margin laba kotor dibanding target yang disepakati','Sesuai/di atas target bulanan',20,'Laporan keuangan'],
+['Arus kas dan ketepatan pencatatan','Rekonsiliasi/pencatatan selesai tepat waktu ÷ total yang dijadwalkan','100% tepat waktu',15,'Laporan kas dan bank'],
+['Ketersediaan produk prioritas','SKU prioritas tersedia ÷ total SKU prioritas × 100%','≥95%',15,'Laporan stok'],
+['Evaluasi kinerja dan tindak lanjut','Rapat evaluasi terlaksana dan tindak lanjut selesai ÷ rencana × 100%','100% evaluasi bulanan; ≥90% tindak lanjut',15,'Notulen/action log'],
+['Pengelolaan supplier dan keputusan pembelian','% pembelian prioritas yang diputuskan sesuai jadwal/kebutuhan','≥90%',10,'PO, catatan supplier']],
+om:[['Kepatuhan checklist operasional','Checklist lengkap ÷ checklist wajib × 100%','≥95%',20,'Checklist buka/tutup toko'],
+['Ketepatan jadwal dan kehadiran tim','Shift terisi sesuai jadwal ÷ total shift × 100%','≥98%',15,'Jadwal dan absensi'],
+['Ketepatan laporan harian/mingguan','Laporan tepat waktu ÷ laporan dijadwalkan × 100%','100%',15,'Laporan divisi'],
+['Akurasi stok bersama inventory','Item cocok saat pemeriksaan ÷ item diperiksa × 100%','≥98% (awal)',20,'Stock opname/sampling'],
+['Penyelesaian kendala operasional','Kendala selesai sesuai SLA ÷ total kendala × 100%','≥90%; tetapkan SLA internal',15,'Log kendala'],
+['Kebersihan, display, dan standar layanan','Skor audit checklist toko','≥90/100',15,'Audit checklist/foto']],
+cs:[['Kecepatan respons chat','Median waktu respons pada jam operasional','≤10 menit pada jam operasional (uji coba)',20,'Log chat/platform'],
+['Penyelesaian pertanyaan/pesanan','Kasus selesai sesuai standar ÷ total kasus × 100%','≥95%',15,'Log layanan/pesanan'],
+['Akurasi input pesanan','Pesanan tanpa kesalahan input ÷ total pesanan × 100%','≥99%',20,'Sistem pesanan dan bukti transaksi'],
+['Akurasi stok marketplace','SKU sampel cocok antara marketplace dan stok aktual ÷ SKU sampel × 100%','≥98%',15,'Marketplace dan kartu stok'],
+['Kualitas listing produk','Listing aktif yang memenuhi standar foto, spesifikasi, harga, kondisi ÷ listing diperiksa × 100%','≥95%',10,'Audit listing'],
+['Follow-up prospek','Prospek ditindaklanjuti sesuai jadwal ÷ prospek perlu follow-up × 100%','≥90%',10,'Database/CRM'],
+['Rating/performa marketplace','Rating dan metrik performa dibanding baseline/platform','Tidak turun dari baseline; target per platform',10,'Dashboard marketplace']],
+sc:[['Pencapaian target penjualan','Realisasi omzet pribadi ÷ target pribadi × 100%','≥100% target bulanan',25,'POS/laporan transaksi'],
+['Conversion rate','Jumlah transaksi ÷ customer/prospek terlayani × 100%','Ditetapkan setelah baseline 1 bulan',15,'Log pengunjung/prospek dan POS'],
+['Nilai transaksi rata-rata','Total nilai transaksi ÷ jumlah transaksi','Sesuai target dari baseline',10,'POS/laporan penjualan'],
+['Upselling/cross-selling','Transaksi dengan produk pendukung ÷ total transaksi relevan × 100%','Awal ≥20% transaksi relevan',15,'Detail item transaksi'],
+['Kualitas konsultasi dan demo','Skor audit observasi layanan berdasarkan checklist','≥90/100',15,'Checklist observasi supervisor'],
+['Follow-up prospek','Prospek di-follow-up sesuai jadwal ÷ prospek wajib di-follow-up × 100%','≥90%',10,'Log prospek'],
+['Kerapian area/display','Skor checklist area penjualan','≥90/100',10,'Checklist/foto display']],
+tk:[['Ketepatan waktu setup/QC','Pekerjaan selesai sesuai tenggat ÷ total pekerjaan × 100%','≥95%',20,'Log pekerjaan/service'],
+['Kelengkapan QC','Produk dengan checklist QC lengkap ÷ produk diproses × 100%','100%',20,'Form QC per unit'],
+['Tingkat temuan cacat setelah QC','Produk bermasalah yang seharusnya terdeteksi QC ÷ produk terjual diperiksa','Tren menurun; target angka setelah baseline',15,'Catatan retur/komplain dan QC'],
+['Akurasi stok','Item cocok antara catatan dan fisik ÷ item dihitung × 100%','≥98% (awal)',20,'Stock opname'],
+['Ketepatan pencatatan barang masuk/keluar','Transaksi stok tercatat benar dan tepat waktu ÷ total transaksi stok × 100%','≥99%',10,'Kartu stok/sistem'],
+['Kesiapan display dan kebersihan produk','Skor audit display dan kondisi produk','≥90/100',5,'Checklist display'],
+['Ketepatan packing produk','Pengiriman lolos checklist packing ÷ total pengiriman × 100%','100% checklist lengkap',10,'Checklist packing/bukti pengiriman']]};
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n.toLocaleString('id-ID',{maximumFractionDigits:2});
+const cat=t=>t>=90?'Sangat baik':t>=80?'Baik':t>=70?'Cukup':t>=60?'Perlu perbaikan':'Perlu pembinaan intensif';
+const col=t=>t>=90?'var(--g)':t>=80?'var(--b)':t>=70?'var(--y)':t>=60?'var(--o)':'var(--r)';
+const p2s=p=>p>=110?5:p>=100?4:p>=90?3:p>=75?2:1;
+let S={kpi:JSON.parse(JSON.stringify(K)),hist:[]},cur=[],BL=false,KEEP=false,EI=null,EF='m';
+try{const o=JSON.parse(localStorage.getItem('mm_kpi_v1')||'null');if(o){if(o.kpi)S.kpi=o.kpi;if(o.hist)S.hist=o.hist}}catch(e){}
+const save=()=>{try{localStorage.setItem('mm_kpi_v1',JSON.stringify(S))}catch(e){}};
+let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(tt);tt=setTimeout(()=>t.style.display='none',2600)};
+function go(t){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===t));document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));if(t==='dash')dash();if(t==='form')form();if(t==='mst')master();scrollTo(0,0)}
+function dash(){
+const ps=[...new Set(S.hist.map(h=>h.period))].sort().reverse(),sel=$('#per'),keep=sel.value;
+sel.innerHTML=ps.length?ps.map(p=>`<option>${p}</option>`).join(''):'<option value="">Belum ada periode</option>';if(ps.includes(keep))sel.value=keep;
+const p=sel.value,cur2=S.hist.filter(h=>h.period===p);
+$('#avg').textContent=cur2.length?`Rata-rata tim: ${fmt(cur2.reduce((a,h)=>a+h.total,0)/cur2.length)} (${cur2.length} dari ${E.length} karyawan dinilai)`:'Belum ada penilaian. Mulai dari tab Penilaian.';
+$('#cards').innerHTML=E.map(e=>{const h=cur2.find(x=>x.e===e.id);
+const tr=S.hist.filter(x=>x.e===e.id).sort((a,b)=>a.period<b.period?-1:1).slice(-4).map(x=>Math.round(x.total)).join(' → ');
+return `<div class="card"><div class="nm">${esc(e.name)}</div><div class="mu">${esc(e.pos)}</div>`+(h?`<div class="sc">${fmt(h.total)}</div><div class="bar"><i style="width:${h.total}%;background:${col(h.total)}"></i></div><div class="ct" style="color:${col(h.total)}">${h.cat}</div>`:`<div class="sc" style="color:var(--mu)">–</div><div class="mu">Belum dinilai</div><button class="s" data-n="${e.id}">Nilai sekarang</button>`)+(tr?`<div class="mu">Tren: ${tr}</div>`:'')+`</div>`}).join('');
+$('#hist').innerHTML=S.hist.length?[...S.hist].sort((a,b)=>a.period<b.period?1:-1).map(h=>{const e=E.find(x=>x.id===h.e);return `<tr><td>${h.period}</td><td><b>${esc(e.name)}</b><small>${esc(e.pos)}</small></td><td>${esc(h.rater)}</td><td><b>${fmt(h.total)}</b></td><td style="color:${col(h.total)}">${h.cat}</td><td style="white-space:nowrap"><button class="s" data-o="${h.e}|${h.period}">Buka</button> <button class="s" data-d="${h.e}|${h.period}">Hapus</button></td></tr>`}).join(''):'<tr><td colspan="6" class="mu">Belum ada riwayat. Simpan penilaian pertama Anda di tab Penilaian.</td></tr>'}
+function form(){
+const e=$('#emp').value,p=$('#prd').value,k=S.kpi[e],old=BL?null:S.hist.find(x=>x.e===e&&x.period===p);BL=false;
+const pv=KEEP?cur:null;KEEP=false;cur=k.map((_,i)=>pv&&pv[i]?pv[i]:old&&old.rows[i]?{...old.rows[i]}:{real:'',pct:'',s:'',note:''});
+if(old&&!pv){$('#rtr').value=old.rater;$('#dt').value=old.date}
+$('#tb').innerHTML=k.map((r,i)=>{const c=cur[i];return `<tr><td><b>${esc(r[0])}</b><small>${esc(r[1])}</small><button class="s" data-fed="${i}" style="padding:2px 8px;font-size:12px;margin-top:4px">Edit indikator</button></td><td>${esc(r[2])}</td><td><input data-i="${i}" data-f="real" value="${esc(c.real)}" placeholder="Hasil / bukti"></td><td><input class="n" type="number" step="any" data-i="${i}" data-f="pct" value="${esc(c.pct)}" placeholder="%"></td><td><select data-i="${i}" data-f="s"><option value="">–</option>${[1,2,3,4,5].map(n=>`<option ${c.s==n?'selected':''}>${n}</option>`).join('')}</select></td><td>${r[3]}</td><td id="v${i}">0</td><td><input data-i="${i}" data-f="note" value="${esc(c.note)}" placeholder="Catatan"></td></tr>`}).join('');
+calc()}
+function calc(){
+const k=S.kpi[$('#emp').value];let t=0,w=0;
+k.forEach((r,i)=>{const v=(+cur[i].s||0)/5*r[3];t+=v;w+=r[3];$('#v'+i).textContent=fmt(v)});
+$('#tot').textContent=fmt(t);$('#cat').textContent=cur.every(x=>x.s)?cat(t):'Skor belum lengkap';$('#cat').style.color=col(t);
+$('#arc').style.strokeDashoffset=100-Math.min(t,100);$('#arc').style.stroke=col(t);$('#nd').style.transform=`rotate(${-90+1.8*Math.min(t,100)}deg)`;
+$('#wn').hidden=w===100;$('#wn').textContent=`Total bobot ${w}%, harus 100%. Perbaiki di tab Master KPI.`;return[t,w]}
+function saveForm(){
+const e=$('#emp').value,p=$('#prd').value,rt=$('#rtr').value.trim();
+if(!p||!rt)return toast('Isi periode dan nama penilai dulu.');
+if(!cur.every(x=>x.s))return toast('Pilih skor 1–5 untuk semua indikator.');
+const[t,w]=calc();if(w!==100)return toast('Total bobot harus 100% sebelum disimpan.');
+S.hist=S.hist.filter(x=>!(x.e===e&&x.period===p));
+S.hist.push({e,period:p,rater:rt,date:$('#dt').value,total:Math.round(t*100)/100,cat:cat(t),rows:cur.map(x=>({...x,s:+x.s}))});
+save();toast('Penilaian tersimpan.');go('dash')}
+function master(){
+const e=$('#me').value,k=S.kpi[e],em=E.find(x=>x.id===e);
+$('#job').innerHTML=`<div class="nm">${esc(em.name)}</div><div class="mu">${esc(em.pos)} · ${esc(em.rep)}</div><div><b>Tanggung jawab utama:</b> ${esc(em.job)}</div>`;
+$('#mt').innerHTML=k.map((r,i)=>`<tr><td><b>${esc(r[0])}</b><small>${esc(r[1])}</small></td><td><input data-i="${i}" data-f="2" value="${esc(r[2])}"></td><td><input class="n" type="number" min="0" max="100" data-i="${i}" data-f="3" value="${r[3]}"></td><td>${esc(r[4])}</td><td style="white-space:nowrap"><button class="s" data-ed="${i}">Edit</button> <button class="s" data-del="${i}">Hapus</button></td></tr>`).join('');mw()}
+function mw(){const w=S.kpi[$('#me').value].reduce((a,r)=>a+r[3],0);$('#mws').textContent=`Total bobot: ${w}%`+(w===100?' ✓':' (harus 100%)');$('#mws').className=w===100?'ok':'bad'}
+function tsv(){const q=v=>String(v??'').replace(/[\t\r\n]+/g,' ');const L=[['Periode','Nama','Posisi','Penilai','Tanggal','Indikator','Target','Bobot','Realisasi/Bukti','Skor','Nilai Berbobot','Catatan'].join('\t')];
+S.hist.forEach(h=>{const em=E.find(x=>x.id===h.e);S.kpi[h.e].forEach((r,i)=>{const x=h.rows[i]||{};L.push([h.period,em.name,em.pos,h.rater,h.date,r[0],r[2],r[3],x.real,x.s,(x.s||0)/5*r[3],x.note].map(q).join('\t'))})});return L.join('\n')}
+function openEd(f,i){EF=f;EI=i;const k=S.kpi[$(f==='f'?'#emp':'#me').value],r=i==null?['','','',0,'']:k[i];$('#eh').textContent=i==null?'Tambah indikator':'Edit indikator';$('#en').value=r[0];$('#ec').value=r[1];$('#et').value=r[2];$('#ew').value=r[3];$('#es').value=r[4];$('#edlg').showModal()}
+$('#esv').onclick=()=>{const n=$('#en').value.trim();if(!n)return toast('Nama indikator wajib diisi.');const id=$(EF==='f'?'#emp':'#me').value,k=S.kpi[id],r=[n,$('#ec').value.trim(),$('#et').value.trim(),Math.max(0,Math.min(100,+$('#ew').value||0)),$('#es').value.trim()];if(EI==null)k.push(r);else k[EI]=r;save();$('#edlg').close();if(EF==='f'){KEEP=true;form()}else master();toast('Indikator disimpan.')};
+$('#ecl').onclick=()=>$('#edlg').close();
+$('#madd').onclick=()=>openEd('m',null);
+$('#tb').onclick=e=>{const f=e.target.dataset.fed;if(f!=null)openEd('f',+f)};
+$('#mt').onclick=e=>{const b=e.target,ed=b.dataset.ed,dl=b.dataset.del;if(ed!=null)openEd('m',+ed);if(dl!=null){const id=$('#me').value,k=S.kpi[id];if(k.length<=1)return toast('Minimal harus ada satu indikator.');if(!b.dataset.s){b.dataset.s=1;b.textContent='Yakin hapus?';return}k.splice(+dl,1);S.hist.forEach(h=>{if(h.e===id)h.rows.splice(+dl,1)});save();master();toast('Indikator dihapus. Sesuaikan bobot agar total 100%.')}};
+// init
+const opt=E.map(e=>`<option value="${e.id}">${esc(e.name)} — ${esc(e.pos)}</option>`).join('');
+$('#emp').innerHTML=opt;$('#me').innerHTML=opt;
+const now=new Date();$('#prd').value=now.toISOString().slice(0,7);$('#dt').value=now.toISOString().slice(0,10);
+$('#nav').onclick=e=>{if(e.target.dataset.t)go(e.target.dataset.t)};
+$('#emp').onchange=$('#prd').onchange=form;$('#me').onchange=master;$('#per').onchange=dash;
+$('#tb').oninput=$('#tb').onchange=e=>{const t=e.target,i=t.dataset.i,f=t.dataset.f;if(i==null)return;cur[i][f]=t.value;
+if(f==='pct'&&t.value!==''){cur[i].s=p2s(+t.value);t.closest('tr').querySelector('select').value=cur[i].s}calc()};
+$('#mt').oninput=e=>{const t=e.target,k=S.kpi[$('#me').value];if(t.dataset.i==null)return;k[t.dataset.i][t.dataset.f]=t.dataset.f==='3'?(+t.value||0):t.value;save();mw()};
+$('#mrs').onclick=()=>{const e=$('#me').value;S.kpi[e]=JSON.parse(JSON.stringify(K[e]));save();master();toast('Target & bobot dikembalikan.')};
+$('#sv').onclick=saveForm;$('#rst').onclick=()=>{BL=true;$('#rtr').value='';form()};
+$('#cards').onclick=e=>{const n=e.target.dataset.n;if(n){$('#emp').value=n;go('form')}};
+$('#hist').onclick=e=>{const b=e.target,o=b.dataset.o,d=b.dataset.d;
+if(o){const[em,p]=o.split('|');$('#emp').value=em;$('#prd').value=p;go('form')}
+if(d){if(!b.dataset.s){b.dataset.s=1;b.textContent='Yakin hapus?';return}const[em,p]=d.split('|');S.hist=S.hist.filter(x=>!(x.e===em&&x.period===p));save();dash();toast('Penilaian dihapus.')}};
+$('#exp').onclick=()=>{$('#cv').value=S.hist.length?tsv():'Belum ada data.';$('#dlg').showModal()};
+$('#cl').onclick=()=>$('#dlg').close();
+$('#cp').onclick=async()=>{$('#cv').select();try{await navigator.clipboard.writeText($('#cv').value)}catch(e){try{document.execCommand('copy')}catch(_){}}toast('Tersalin.')};
+dash();
+</script></body></html>
